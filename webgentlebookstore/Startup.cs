@@ -31,8 +31,8 @@ namespace webgentlebookstore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
+                //endpoints.MapGet("/", async context =>
+                //{
                     endpoints.MapDefaultControllerRoute();
                 //if (env.IsDevelopment())
                 //{
@@ -52,7 +52,7 @@ namespace webgentlebookstore
                 //        await context.Response.WriteAsync(env.EnvironmentName);
                 //    }
 
-                });
+              // });
             });
         }
     }
