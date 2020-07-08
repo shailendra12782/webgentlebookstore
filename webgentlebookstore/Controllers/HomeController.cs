@@ -9,9 +9,9 @@ namespace webgentlebookstore.Controllers
 {
     public class HomeController: Controller
     {
-        public string Index()
+        public ViewResult Index()
         {
-            return "Hello from Controller";
+           return  View();
         
         }
     }

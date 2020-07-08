@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace webgentlebookstore
 {
@@ -26,34 +28,50 @@ namespace webgentlebookstore
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "staticfile")),
+            //    RequestPath = "/staticfile"
+            //});
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.UseAuthorization();
+            app.UseEndpoints(endpoint =>
             {
-                //endpoints.MapGet("/", async context =>
-                //{
-                    endpoints.MapDefaultControllerRoute();
-                //if (env.IsDevelopment())
-                //{
-                //   await //context.Response.WriteAsync("Hello World");
-                //}
-                //else if (env.IsProduction())
-                //    {
-                //    await context.Response.WriteAsync("Hello from Prod");
-                //     }     
-                //else if (env.IsStaging())
-                //{
-                //    await context.Response.WriteAsync("Hello from Staging");
-                //}
+                endpoint.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                //    else 
-                //    {
-                //        await context.Response.WriteAsync(env.EnvironmentName);
-                //    }
-
-              // });
             });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //       {
+            //           await context.Response.WriteAsync("Hello from Staging");
+            //           endpoints.MapDefaultControllerRoute();
+            //           //if (env.IsDevelopment())
+            //           //{
+            //           //    await context.Response.WriteAsync("Hello World");
+
+            //           //}
+            //           //else if (env.IsProduction())
+            //           //{
+            //           //    await context.Response.WriteAsync("Hello from Prod");
+            //           //}
+            //           //else if (env.IsStaging())
+            //           //{Hello from Staging
+            //           //    await context.Response.WriteAsync("Hello from Staging");
+            //           //}
+
+            //           //else
+            //           //{
+            //           //    await context.Response.WriteAsync(env.EnvironmentName);
+            //           //}
+
+            //       });
+            //});
         }
     }
 }
